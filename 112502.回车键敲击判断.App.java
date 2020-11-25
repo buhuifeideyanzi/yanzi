@@ -13,7 +13,7 @@ public class App {
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
-                //回车键
+                //回车键判断
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     if ((textArea_A.getText()).equals("大雁")) {
                         textArea_B.setText("回答正确\n");
