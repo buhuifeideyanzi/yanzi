@@ -1,0 +1,62 @@
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class App {
+    JPanel myPanel=new JPanel();
+    JLabel label_txt=new JLabel();
+    JLabel label_plane=new JLabel();//添加面板
+    JLabel label_pack=new JLabel();//添加面板
+    int CELL=64;
+    //构造方法
+    public App() {     //键盘监听事件
+        myPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode()==e.VK_UP){   //敲击上键
+                    label_plane.setBounds(label_plane.getX(),label_plane.getY()-CELL,CELL,CELL);
+                }
+                if (e.getKeyCode() == e.VK_DOWN) {    //敲击下键
+                    label_plane.setBounds(label_plane.getX(), label_plane.getY()+CELL , CELL, CELL);
+                }
+                if (e.getKeyCode() == e.VK_LEFT) {   //敲击左键
+                    label_plane.setBounds(label_plane.getX()-CELL, label_plane.getY() , CELL, CELL);
+                }
+                if (e.getKeyCode() == e.VK_RIGHT) {   //敲击右键
+                    label_plane.setBounds(label_plane.getX()+CELL, label_plane.getY() , CELL, CELL);
+                }
+
+            }
+        });
+
+    }
+    //显示窗体方法
+    void go(){
+        label_txt.setText("小飞机");
+        label_txt.setBounds(0,0,200,30);
+        myPanel.add(label_txt);
+
+        java.net.URL imgURL = App.class.getResource("img/plane0.png");//飞机
+        java.net.URL backgroundURL= App.class.getResource("img/background.png");//设置背景图
+        label_plane.setIcon(new ImageIcon(imgURL));
+        label_plane.setBounds(100,100,CELL,CELL);//设置飞机的大小
+        myPanel.add(label_plane); //添加到面板上
+
+        label_pack.setIcon(new ImageIcon(backgroundURL));
+        label_pack.setBounds(0,0,1000,900);//设置背景的大小
+        myPanel.add(label_pack);//添加到面板上
+
+        myPanel.setLayout(null);
+        JFrame frame = new JFrame("一个小程序");
+        frame.setContentPane(myPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(100,100,1000,900);
+        //frame.pack();
+        myPanel.setFocusable(true);//键盘监听必须加panel面板的焦点获取才可以
+        frame.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new App().go();
+    }
+}
